@@ -23,6 +23,15 @@ class GroupListView(generics.ListAPIView):
         return Group.objects.none()
 
 
+class MentorDetailView(generics.RetrieveAPIView):
+    queryset = Mentor.objects.all()
+    serializer_class = MentorSerializer
+    permission_classes = [IsMentor]
+
+    def get_object(self):
+        return get_object_or_404(Mentor, user=self.request.user)
+
+
 class StudentListView(generics.ListAPIView):
     serializer_class = StudentSerializer
     permission_classes = [IsMentorOrAdmin]
