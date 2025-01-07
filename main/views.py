@@ -4,6 +4,14 @@ from .serializers import *
 from .permissions import *
 
 
+class UserDetailView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = GetUserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+
 class CourseListView(generics.ListAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer

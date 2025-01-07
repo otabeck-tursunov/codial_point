@@ -33,6 +33,7 @@ urlpatterns = [
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
+    path('users/get-me/', UserDetailView.as_view(), name='user-details'),
     path('courses/', CourseListView.as_view(), name='course-list'),
     path('groups/', GroupListView.as_view(), name='group-list'),
     path('mentors/get-me/', MentorDetailView.as_view(), name='mentor-details'),

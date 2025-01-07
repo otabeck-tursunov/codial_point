@@ -2,6 +2,29 @@ from rest_framework import serializers
 from .models import *
 
 
+class GetUserSerializer(serializers.ModelSerializer):
+    role = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'date_joined', 'role')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def get_role(self, obj):
+        """
+        Roleni aniqlash:
+        - Agar foydalanuvchi Mentor bo‘lsa, 'mentor' qaytadi.
+        - Agar foydalanuvchi Student bo‘lsa, 'student' qaytadi.
+        - Agar ikkalasiga ham aloqador bo‘lmasa, 'unknown' qaytadi.
+        """
+        if hasattr(obj, 'mentor'):
+            return 'mentor'
+        elif hasattr(obj, 'student'):
+            return 'student'
+        return 'unknown'
+
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
