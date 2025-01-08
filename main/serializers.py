@@ -24,7 +24,6 @@ class GetUserSerializer(serializers.ModelSerializer):
         return 'unknown'
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
