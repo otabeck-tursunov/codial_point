@@ -49,3 +49,11 @@ class GivePointAdmin(admin.ModelAdmin):
         'student__user__username', 'student__user__first_name', 'student__user__last_name',
         'mentor__user__username', 'mentor__user__first_name', 'mentor__user__last_name'
     )
+
+
+@admin.register(New)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_at')
+    list_display_links = ('id', 'title')
+    search_fields = ('title','description')
+    list_filter = ('created_at',)

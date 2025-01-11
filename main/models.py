@@ -115,3 +115,13 @@ class GivePoint(models.Model):
         if self.mentor:
             self.mentor.point_limit -= self.amount
             self.mentor.save()
+
+
+class New(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField()
+    image = models.ImageField(upload_to='news/', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
